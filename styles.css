@@ -1,0 +1,45 @@
+.card {
+    height: 400px;
+    width: 700px;
+}
+
+#start {
+    background-color: green;
+    width: 100px;
+    height: 50px;
+}
+
+.ansSelect0{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+.ansSelect1{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+.ansSelect2{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+.ansSelect3{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+.highscores{
+    background-color: orange;
+    width: 100px;
+    height: 50px;
+}
+
+
+
+
+
