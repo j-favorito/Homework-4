@@ -9,7 +9,10 @@ var answerArr5 = ["floor","round","return","down"]
 var score = document.querySelector("#score")
 var count = 0;
 score.textContent="Score: 0";
-var highScores=[];
+var savedScores=[];
+var totalTime=30;
+var timeLeft=30;
+var interval;
 
 
 
@@ -27,6 +30,7 @@ function startPage(event){
     var h1Element=document.createElement("h1");
     start.addEventListener("click", function(){
         cardBody.innerHTML="";
+        countdown();
         questionGenerator1();
     })
 }
@@ -53,14 +57,17 @@ function questionGenerator1(event){
         questionGenerator2();
     });
     wrongAnswer1.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator2();
     });
     wrongAnswer2.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator2();
     });
     wrongAnswer3.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator2();
     });
@@ -88,14 +95,17 @@ function questionGenerator2(event){
         questionGenerator3();
     });
     wrongAnswer1.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator3();
     });
     wrongAnswer2.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator3();
     });
     wrongAnswer3.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator3();
     });
@@ -123,14 +133,17 @@ function questionGenerator3(event){
         questionGenerator4();
     });
     wrongAnswer1.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator4();
     });
     wrongAnswer2.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator4();
     });
     wrongAnswer3.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator4();
     });
@@ -158,14 +171,17 @@ function questionGenerator4(event){
         questionGenerator5();
     });
     wrongAnswer1.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator5();
     });
     wrongAnswer2.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator5();
     });
     wrongAnswer3.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         questionGenerator5();
     });
@@ -193,21 +209,51 @@ function questionGenerator5(event){
         endPage();
     });
     wrongAnswer1.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         endPage();
     });
     wrongAnswer2.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         endPage();
     });
     wrongAnswer3.addEventListener("click",function(){
+        timeLeft-5;
         cardBody.innerHTML="";
         endPage();
     });
 }
 
 function endPage(){
-}
+    var userName = prompt("Enter your name to save your score");
+    var userData={
+        name: userName,
+        score: count
+        };
+    var storedScores = JSON.parse(localStorage.getItem("allSaves"))
+        if(storedScores!==null){
+            savedScores.push(storedScores);
+        }
+        savedScores.push(userData);
+        localStorage.setItem("allSaves", JSON.stringify(savedScores));
+    }
+
+function countdown(){
+    var timeDisplay=document.querySelector("#timer");
+    timeDisplay.textContent=timeLeft;
+        if(timeLeft>0){
+            interval = setInterval(function(){
+                timeLeft--;
+                timeDisplay.textContent=timeLeft;
+            },1000)
+        }
+        else{
+            endPage();
+        }
+    }
+
+
 
 
 
