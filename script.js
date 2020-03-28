@@ -274,9 +274,12 @@ function highscorePage(){
     var highscoreData=localStorage.getItem("allSaves");
     var highscoreList=JSON.parse(highscoreData);
     for(var i=0;i<highscoreList.length;i++){
-        var hsElement=document.createElement("h3");
-        hsElement.textContent=highscoreList[i]['name','score'];
-        cardBody.appendChild(hsElement);
+        var hsNameElement=document.createElement("h3");
+        var hsScoreElement=document.createElement("h3");
+        hsNameElement.textContent=highscoreList[i]['name'];
+        hsScoreElement.textContent=highscoreList[i]['score'];
+        cardBody.appendChild(hsNameElement);
+        cardBody.appendChild(hsScoreElement);
     }
 
 }
