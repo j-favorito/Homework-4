@@ -23,7 +23,9 @@ var timeLeft=30;
 var interval;
 //var that subtracts time lost
 var timeLost=0;
-
+var highscoreList=[];
+//t is a flag variable
+var t=0;
 
 
 
@@ -221,32 +223,36 @@ function questionGenerator5(event){
         count++;
         cardBody.innerHTML="";
         score.textContent="Score: " + count;
+//t flags the prompt so it wont appear again
         endPage();
+        t++;
     });
     wrongAnswer1.addEventListener("click",function(){
         timeLost+5;
         cardBody.innerHTML="";
         endPage();
+        t++;
     });
     wrongAnswer2.addEventListener("click",function(){
         timeLost+5;
         cardBody.innerHTML="";
         endPage();
+        t++;
     });
     wrongAnswer3.addEventListener("click",function(){
         timeLost+5;
         cardBody.innerHTML="";
         endPage();
+        t++;
     });
 }
 //end page which asks user to enter name to save score
 function endPage(){
+    if(t<1){
     var userName = prompt("Enter your name to save your score");
-//creates a user profile
-    var userData={
-        name: userName,
-        score: count
-        };
+    }
+    //creates a user profile
+    var userData=userName+" "+count;
 //retrieves local storage scoes and adds new score to data
     var storedScores = JSON.parse(localStorage.getItem("allSaves"))
         if(storedScores!==null){
@@ -272,14 +278,11 @@ function endPage(){
 function highscorePage(){
 //displays highscores
     var highscoreData=localStorage.getItem("allSaves");
-    var highscoreList=JSON.parse(highscoreData);
+    highscoreList=JSON.parse(highscoreData);
     for(var i=0;i<highscoreList.length;i++){
-        var hsNameElement=document.createElement("h3");
-        var hsScoreElement=document.createElement("h3");
-        hsNameElement.textContent=highscoreList[i]['name'];
-        hsScoreElement.textContent=highscoreList[i]['score'];
+        var hsNameElement=document.createElement("ul");
+        hsNameElement.textContent=highscoreList[i];
         cardBody.appendChild(hsNameElement);
-        cardBody.appendChild(hsScoreElement);
     }
 
 }
@@ -292,8 +295,12 @@ function countdown(){
                 timeLeft--;
                 timeDisplay.textContent=timeLeft;
 //if timer reaches 0 launches end page
+                if(t===1){
+                    return;
+                    timeDisplay.textContent="";
+                }
                 if(timeLeft===0){
-                    timeDisplay.innerHTML="";
+                    timeDisplay.textContent="";
                     cardBody.innerHTML="";
                     endPage(); 
             }
